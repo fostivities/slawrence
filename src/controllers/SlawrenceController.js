@@ -32,7 +32,7 @@ var User = require('../schemas/User');
 function temp (req, res) {
     let reqBody = req.body;
 
-    if (reqBody.text) {
+    if (reqBody.text && reqBody.text.indexOf('sb') > -1) {
         // let options = {
         //     hostname: 'api.groupme.com',
         //     path: '/v3/bots/post',
