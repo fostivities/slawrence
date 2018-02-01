@@ -42,7 +42,7 @@ handleGroupMePost = (req, res) => {
 
     if (checkForSB(text)) {
 
-        response.text = text.indexOf('--help') ? setHelpResponse() : setBetResponse();
+        response.text = text.indexOf('--help') > -1 ? setHelpResponse() : setBetResponse();
 
         if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
             res.status(200).send(response);
