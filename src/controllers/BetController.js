@@ -1,19 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const Bet = require('../schemas/Bet');
+const Bet = require('../models/Bet');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-function getAllBets (req, res) {
+getAllBets = (req, res) => {
     Bet.find({}, (err, bets) => {
         if (err) return res.status(500).send('There was a problem finding the users.');
         res.status(200).send(bets);
     });
 }
 
-function postBet (req, res) {
+postBet = (req, res) => {
     let newBet = new Bet(req.body);
     Bet.create(newBet, (err, bet) => {
         if (err) return res.status(500).send('There was a problem adding the information to the database.');
@@ -21,7 +21,7 @@ function postBet (req, res) {
     });
 }
 
-function getBetById (req, res) {
+getBetById = (req, res) => {
     Bet.findById(req.params.id, (err, bet) => {
         if (err) return res.status(500).send('There was a problem finding the user.');
         if (!bet) return res.status(404).send('No bet found');
@@ -29,7 +29,7 @@ function getBetById (req, res) {
     });
 }
 
-function updateBetById (req, res) {
+updateBetById = (req, res) => {
     Bet.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, bet) => {
         if (err) return res.status(500).send('There was a problem updating the user.');
         if (!bet) return res.status(404).send('No bet found');
@@ -37,7 +37,7 @@ function updateBetById (req, res) {
     });
 }
 
-function deleteBetById (req, res) {
+deleteBetById = (req, res) => {
     Bet.findByIdAndRemove(req.params.id, (err, bet) => {
         if (err) return res.status(500).send('There was a problem deleting the user.');
         if (!bet) return res.status(404).send('No bet found');

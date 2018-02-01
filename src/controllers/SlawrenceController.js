@@ -1,94 +1,63 @@
 // UserController.js
-var superAgent = require('superagent');
-var http = require('http');
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
+const superAgent = require('superagent');
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+
+const groupMeUrl = 'https://api.groupme.com/v3/bots/post';
+const allowedNames = ['@sb', '@slawrence'];
+const response = {
+    "bot_id": "4091fd6b5183549c40fd901abc",
+    "text": ""
+};
+
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-var User = require('../schemas/User');
-
-// // creates a new user
-// router.post('/', (req, res) => {
-//     var reqBody = req.body;
-
-//     if (reqBody.text) {
-//         postMessage();
-//     }
-
-//     // User.create(
-//     //     {
-//     //         name: req.body.name,
-//     //         email: req.body.email,
-//     //         password: req.body.password
-//     //     },
-//     //     (err, user) => {
-//     //         if (err) return res.status(500).send("There was a problem adding the information to the database.");
-//     //         res.status(200).send(user);
-//     //     });
-// });
-
-function temp (req, res) {
-    let reqBody = req.body;
-
-    if (reqBody.text && reqBody.text.indexOf('sb') > -1) {
-        // let options = {
-        //     hostname: 'api.groupme.com',
-        //     path: '/v3/bots/post',
-        //     method: 'POST'
-        // }
-
-        let temp = {
-            "bot_id": "4091fd6b5183549c40fd901abc",
-            "text": "Hello World"
-        }
-
-        superAgent.post('https://api.groupme.com/v3/bots/post')
-            .send(temp)
-            .end(function(err, res) {
-                //TODO
-            });
-
-        res.status(200).send(temp);
-    }
+checkForSB = (text) => {
+    return text && (text.indexOf(allowedNames[0]) > -1 || text.indexOf(allowedNames[1]) > -1);
 }
 
-router.post('/', (req, res) => temp(req, res));
+checkForHelpText = (text) => {
+    return text.indexOf('--help') > -1;
+}
 
-function postMessage() {
-    var botResponse, options, body, botReq;
+setHelpResponse = () => {
+    return (
+        'Slawrence\'s help section:\n'
+        + 'To set a bet: Use \'@sb <bet amount in number form>/<bet description>\'\n'
+        + 'Example: \' @sb 4/hawks win the championship\'\n'
+        + 'Once a bet is set, a unique ID will be returned for people to accept the bet.'
+        + 'Example: \'From Slawrence - Bet Set - Use \'@sb take 112\' to accept\''
+        + 'To accept a bet: Use \'@sb take <bet id>\''
+        + 'Example: \'@sb take 112\''
+    );
+}
 
-    botResponse = "Hello World!";
+handleGroupMePost = (req, res) => {
+    let body = req.body;
+    let text = body.text;
 
-    options = {
-        hostname: 'api.groupme.com',
-        path: '/v3/bots/post',
-        method: 'POST'
-    }
+    if (checkForSB(text)) {
 
-    body = {
-        "bot_id" : 12,
-        "text" : botResponse
-    }
+        response.text = text.indexOf('--help') ? setHelpResponse() : setBetResponse();
 
-    var botReq = http.request(options, function(res) {
-        if (res.statusCode === 202 || res.statusCode === 302) {
-            //neat
+        if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
+            res.status(200).send(response);
         } else {
-            console.log('rejecting bad status code ' + res.statusCode);
-        }
-    });
+            superAgent.post(groupMeUrl)
+                .send(response)
+                .end((err, res) => {
+                    //TODO
+                });
 
-    botReq.on('error', function(err) {
-        console.log('error posting message '  + JSON.stringify(err));
-    });
-    
-    botReq.on('timeout', function(err) {
-        console.log('timeout posting message '  + JSON.stringify(err));
-    });
-    
-    botReq.end(JSON.stringify(body));
+            res.status(200).send();
+        }
+    } else {
+        res.status(200).send('No @sb');
+    }
 }
+
+router.post('/', (req, res) => handleGroupMePost(req, res));
 
 module.exports = router;
