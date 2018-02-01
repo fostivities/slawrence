@@ -26,9 +26,9 @@ setHelpResponse = () => {
     return (
         'Slawrence\'s help section:\n'
         + 'To set a bet: Use \'@sb <bet amount in number form>/<bet description>\'\n'
-        + 'Example: \' @sb 4/hawks win the championship\'\n'
-        + 'Once a bet is set, a unique ID will be returned for people to accept the bet.'
-        + 'Example: \'From Slawrence - Bet Set - Use \'@sb take 112\' to accept\''
+        + 'Example: \'@sb 4/hawks win the championship\'\n\n'
+        + 'Once a bet is set, a unique ID will be returned for people to accept the bet.\n'
+        + 'Example: \'From Slawrence - Bet Set - Use \'@sb take 112\' to accept\'\n\n'
         + 'To accept a bet: Use \'@sb take <bet id>\''
         + 'Example: \'@sb take 112\''
     );
@@ -50,8 +50,6 @@ handleGroupMePost = (req, res) => {
                 .end((err, res) => {
                     //TODO
                 });
-
-            res.status(200).send();
         }
     } else {
         res.status(200).send('No @sb');
