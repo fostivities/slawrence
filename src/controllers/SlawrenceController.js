@@ -1,4 +1,5 @@
 // UserController.js
+var superAgent = require('superagent');
 var http = require('http');
 var express = require('express');
 var router = express.Router();
@@ -42,6 +43,12 @@ function temp (req, res) {
             "bot_id": "4091fd6b5183549c40fd901abc",
             "text": "Hello World"
         }
+
+        superAgent.post('https://api.groupme.com/v3/bots/post')
+            .send(temp)
+            .end(function(err, res) {
+                //TODO
+            });
 
         res.status(200).send(temp);
     }
