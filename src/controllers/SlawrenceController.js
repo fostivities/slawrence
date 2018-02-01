@@ -29,8 +29,10 @@ setHelpResponse = () => {
         + 'Example: \'@sb 4/hawks win the championship\'\n\n'
         + 'Once a bet is set, a unique ID will be returned for people to accept the bet.\n'
         + 'Example: \'From Slawrence - Bet Set - Use \'@sb take 112\' to accept\'\n\n'
-        + 'To accept a bet: Use \'@sb take <bet id>\''
-        + 'Example: \'@sb take 112\''
+        + 'To accept a bet: Use \'@sb take <bet id>\'\n'
+        + 'Example: \'@sb take 112\'\n\n'
+        + 'Notes: '
+        + 'To see a list of your bets visit: https://fostivities.github.io/fostco/pointlist'
     );
 }
 
@@ -51,8 +53,6 @@ handleGroupMePost = (req, res) => {
                     //TODO
                 });
         }
-    } else {
-        res.status(200).send('No @sb');
     }
 }
 
