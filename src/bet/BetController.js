@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const Bet = require('../models/Bet');
+const Bet = require('./Bet');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());

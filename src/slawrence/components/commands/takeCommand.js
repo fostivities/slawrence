@@ -1,0 +1,5 @@
+takeCommand = () => {
+
+}
+
+module.exports = takeCommand;

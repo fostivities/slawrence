@@ -1,0 +1,5 @@
+errorCommand = () => {
+
+}
+
+module.exports = errorCommand;

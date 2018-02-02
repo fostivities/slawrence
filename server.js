@@ -3,8 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 const port = process.env.PORT || 4000;
 
-const SlawrenceController = require('./src/controllers/SlawrenceController');
-const BetController = require('./src/controllers/BetController');
+const SlawrenceController = require('./src/slawrence/SlawrenceController');
+const BetController = require('./src/bet/BetController');
 
 mongoose.connect('mongodb://yukon11:drtsao11@ds115758.mlab.com:15758/slawrence-db');
 
