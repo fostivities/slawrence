@@ -27,8 +27,10 @@ setHelpResponse = () => {
     let nameUse =           'Use @sb or @slawrence for commands (case doesn\'t matter)\n\n';
 
     let definitions =       'Definitions\n'
-                            + 'setter - person who made the bet.\n'
-                            + 'taker - person who accepted the bet\n\n';
+                            + 'setter:\n'
+                            + 'person who made the bet.\n'
+                            + 'taker\n'
+                            + 'person who accepted the bet\n\n';
 
     let commands =          'Commands:\n'
                             + 'Use @sb +\n'
@@ -67,13 +69,13 @@ setHelpResponse = () => {
     //                         + '\'@sb <betID> cancel\'\n\n';
 
     let notes =             'Notes:\n'
-                            + 'Cancelling the bet will remove the\n'
+                            + '1 .Cancelling the bet will remove the '
                             + 'bet entirely.\n\n'
-                            + 'Commands are based on the user that\n'
-                            + 'issued them. For example, user 3\n'
-                            + 'cannot cancel a bet between user 1\n'
+                            + '2. Commands are based on the user that '
+                            + 'issued them. For example, user 3 '
+                            + 'cannot cancel a bet between user 1 '
                             + 'and user 2.\n\n'
-                            + 'Currently only supports one vs. one\n'
+                            + '3. Currently only supports one vs. one '
                             + 'betting.\n\n';
 
     let visit =             'visit: https://fostivities.github.io/fostco/slawrence'
