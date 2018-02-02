@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 
+const ReceivedMessage = require('./ReceivedMessage');
 const handleCommands = require('./components/commandController'); 
 
 const allowedNames = ['@sb ', '@slawrence '];
@@ -27,12 +28,10 @@ removeSBName = (text) => {
 }
 
 handleGroupMePost = (req, res) => {
-    let text = req.body.text.toLowerCase();
+    let recievedMessage = new ReceivedMessage(req.body);
 
-    if (checkForSB(text)) {
-        text = removeSBName(text);
-
-        response.text = handleCommands(text);
+    if (recievedMessage.isValid) {
+        response.text = handleCommands(recievedMessage);
 
         if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
             res.status(200).send(response);

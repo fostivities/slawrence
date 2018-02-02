@@ -3,14 +3,13 @@ const mongoose = require('mongoose');
 const BetSchema = new mongoose.Schema(
     {
         _id: { type: Number, deafult: 0 },
-        betIndex: { type: Number },
-        nameOfMaker: { type: String, require: true },
+        setterName: { type: String, require: true },
         amount: { type: Number, require: true },
         description: { type: String, require: true },
         createdAt: { type: Date, default: Date.now },
-        isBetTaken: { type: Boolean, default: false },
-        nameOfTaker: { type: String },
-        nameOfWinner: { type: String },
+        status: { type: String, default: 'open' },
+        takerName: { type: String },
+        winnerName: { type: String },
         betResolvedAt: { type: Date }
     },
     {
