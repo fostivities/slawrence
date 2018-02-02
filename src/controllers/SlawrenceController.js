@@ -31,45 +31,48 @@ setHelpResponse = () => {
                             + 'taker - person who accepted the bet\n\n';
 
     let commands =          'Commands:\n'
-                            + 'User @sb +\n'
+                            + 'Use @sb +\n'
                             + 'set [betID]/[bet description]\n'
                             + 'take [betID]\n'
-                            +'won [betID] [setter/taker]\n'
+                            + 'won [betID] [setter/taker]\n'
                             + 'cancel [betID]\n\n';
+
+    let extra =             'Once a bet is created using \'set\''
+                            + ' a [betID] will be returned for use\n\n'
 
     // For more info on commands use 
     // '@sb --help [command]'
     
-    let setBet =            'Set Bet:\n'
-                            + '\'@sb <bet amount>/<bet description>\'\n\n';
+    // let setBet =            'Set Bet:\n'
+    //                         + '\'@sb <bet amount>/<bet description>\'\n\n';
 
-    let setBetResponse =    'Set bet bot response:\n'
-                            + 'Bet made, ID is <betID>\n'
-                            + 'Use \'@sb <betID> take\' to set bet\n\n';
+    // let setBetResponse =    'Set bet bot response:\n'
+    //                         + 'Bet made, ID is <betID>\n'
+    //                         + 'Use \'@sb <betID> take\' to set bet\n\n';
 
-    let acceptBet =         'Accept bet:\n'
-                            + '\'@sb <betID> take\'\n\n';
+    // let acceptBet =         'Accept bet:\n'
+    //                         + '\'@sb <betID> take\'\n\n';
 
-    let acceptBetResponse = 'Accept bet bot response:\n'
-                            + '\'Bet <betID> set for\n'
-                            + '<user1> and <user2>\'\n\n';
+    // let acceptBetResponse = 'Accept bet bot response:\n'
+    //                         + '\'Bet <betID> set for\n'
+    //                         + '<user1> and <user2>\'\n\n';
     
-    let winBet =            'Win bet:\n'
-                            + '\'@sb <betID> won by <setter/taker>\'\n\n';
+    // let winBet =            'Win bet:\n'
+    //                         + '\'@sb <betID> won by <setter/taker>\'\n\n';
 
-    let winBetResponse =    'Win bet bot response:\n'
-                            + '\'Win confirmed for <betID>\'\n\n';
+    // let winBetResponse =    'Win bet bot response:\n'
+    //                         + '\'Win confirmed for <betID>\'\n\n';
 
-    let cancelBet =       'Cancel bet:\n'
-                            + '\'@sb <betID> cancel\'\n\n';
+    // let cancelBet =       'Cancel bet:\n'
+    //                         + '\'@sb <betID> cancel\'\n\n';
 
     let notes =             'Notes:\n'
                             + 'Cancelling the bet will remove the\n'
-                            + 'bet entirely.\n'
+                            + 'bet entirely.\n\n'
                             + 'Commands are based on the user that\n'
                             + 'issued them. For example, user 3\n'
                             + 'cannot cancel a bet between user 1\n'
-                            + 'and user 2.'
+                            + 'and user 2.\n\n'
                             + 'Currently only supports one vs. one\n'
                             + 'betting.\n\n';
 
@@ -80,12 +83,13 @@ setHelpResponse = () => {
             + nameUse
             + definitions
             + commands
-            + setBet
-            + setBetResponse
-            + acceptBet
-            + acceptBetResponse
-            + winBet
-            + cancelBet
+            + extra
+            // + setBet
+            // + setBetResponse
+            // + acceptBet
+            // + acceptBetResponse
+            // + winBet
+            // + cancelBet
             + notes
             + visit;
 }
