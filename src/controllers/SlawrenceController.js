@@ -23,77 +23,33 @@ checkForHelpText = (text) => {
 }
 
 setHelpResponse = () => {
-    let title =             'Slawrence\'s help section:\n';
-    let nameUse =           'Use @sb or @slawrence for commands (case doesn\'t matter)\n\n';
+    return (
+        'Slawrence\'s help section:\n'
+        + 'Use @sb or @slawrence for commands (case doesn\'t matter)\n\n'
 
-    let definitions =       'Definitions\n'
-                            + 'setter:\n'
-                            + 'person who made the bet.\n'
-                            + 'taker\n'
-                            + 'person who accepted the bet\n\n';
+        + 'Definitions\n'
+        + 'setter:\n'
+        + 'person who made the bet.\n'
+        + 'taker:\n'
+        + 'person who accepted the bet\n\n'
 
-    let commands =          'Commands:\n'
-                            + 'Use @sb +\n'
-                            + 'set [betID]/[bet description]\n'
-                            + 'take [betID]\n'
-                            + 'won [betID] [setter/taker]\n'
-                            + 'cancel [betID]\n\n';
+        + 'Commands:\n'
+        + 'Use @sb +\n'
+        + 'set [betID]/[bet description]\n'
+        + 'take [betID]\n'
+        + 'won [betID] [setter/taker]\n'
+        + 'cancel [betID]\n\n'
 
-    let extra =             'Once a bet is created using \'set\''
-                            + ' a [betID] will be returned for use\n\n'
+        + 'Once a bet is created using \'set\' a [betID] will be returned for use\n\n'
 
-    // For more info on commands use 
-    // '@sb --help [command]'
-    
-    // let setBet =            'Set Bet:\n'
-    //                         + '\'@sb <bet amount>/<bet description>\'\n\n';
+        + 'Notes:\n'
+        + '1. Cancelling the bet will remove the bet entirely.\n\n'
+        + '2. Commands are based on the user that issued them. For example, user 3 cannot cancel a bet between user 1 and user 2.\n\n'
+        + '3. Currently only supports one vs. one betting.\n\n'
 
-    // let setBetResponse =    'Set bet bot response:\n'
-    //                         + 'Bet made, ID is <betID>\n'
-    //                         + 'Use \'@sb <betID> take\' to set bet\n\n';
-
-    // let acceptBet =         'Accept bet:\n'
-    //                         + '\'@sb <betID> take\'\n\n';
-
-    // let acceptBetResponse = 'Accept bet bot response:\n'
-    //                         + '\'Bet <betID> set for\n'
-    //                         + '<user1> and <user2>\'\n\n';
-    
-    // let winBet =            'Win bet:\n'
-    //                         + '\'@sb <betID> won by <setter/taker>\'\n\n';
-
-    // let winBetResponse =    'Win bet bot response:\n'
-    //                         + '\'Win confirmed for <betID>\'\n\n';
-
-    // let cancelBet =       'Cancel bet:\n'
-    //                         + '\'@sb <betID> cancel\'\n\n';
-
-    let notes =             'Notes:\n'
-                            + '1 .Cancelling the bet will remove the '
-                            + 'bet entirely.\n\n'
-                            + '2. Commands are based on the user that '
-                            + 'issued them. For example, user 3 '
-                            + 'cannot cancel a bet between user 1 '
-                            + 'and user 2.\n\n'
-                            + '3. Currently only supports one vs. one '
-                            + 'betting.\n\n';
-
-    let visit =             'visit: https://fostivities.github.io/fostco/slawrence'
-                            + ' to view bet statistics.';
-
-    return title 
-            + nameUse
-            + definitions
-            + commands
-            + extra
-            // + setBet
-            // + setBetResponse
-            // + acceptBet
-            // + acceptBetResponse
-            // + winBet
-            // + cancelBet
-            + notes
-            + visit;
+        + 'To view bet statistics, visit: \n'
+        + 'https://fostivities.github.io/fostco/slawrence'
+    );
 }
 
 handleGroupMePost = (req, res) => {
