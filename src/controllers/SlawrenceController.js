@@ -23,17 +23,71 @@ checkForHelpText = (text) => {
 }
 
 setHelpResponse = () => {
-    return (
-        'Slawrence\'s help section:\n'
-        + 'To set a bet: Use \'@sb <bet amount in number form>/<bet description>\'\n'
-        + 'Example: \'@sb 4/hawks win the championship\'\n\n'
-        + 'Once a bet is set, a unique ID will be returned for people to accept the bet.\n'
-        + 'Example: \'From Slawrence - Bet Set - Use \'@sb take 112\' to accept\'\n\n'
-        + 'To accept a bet: Use \'@sb take <bet id>\'\n'
-        + 'Example: \'@sb take 112\'\n\n'
-        + 'Notes: '
-        + 'To see a list of your bets visit: https://fostivities.github.io/fostco/pointlist'
-    );
+    let title =             'Slawrence\'s help section:\n';
+    let nameUse =           'Use @sb or @slawrence for commands (case doesn\'t matter)\n\n';
+
+    let definitions =       'Definitions\n'
+                            + 'setter - person who made the bet.\n'
+                            + 'taker - person who accepted the bet\n\n';
+
+    let commands =          'Commands:\n'
+                            + 'User @sb +\n'
+                            + 'set [betID]/[bet description]\n'
+                            + 'take [betID]\n'
+                            +'won [betID] [setter/taker]\n'
+                            + 'cancel [betID]\n\n';
+
+    // For more info on commands use 
+    // '@sb --help [command]'
+    
+    let setBet =            'Set Bet:\n'
+                            + '\'@sb <bet amount>/<bet description>\'\n\n';
+
+    let setBetResponse =    'Set bet bot response:\n'
+                            + 'Bet made, ID is <betID>\n'
+                            + 'Use \'@sb <betID> take\' to set bet\n\n';
+
+    let acceptBet =         'Accept bet:\n'
+                            + '\'@sb <betID> take\'\n\n';
+
+    let acceptBetResponse = 'Accept bet bot response:\n'
+                            + '\'Bet <betID> set for\n'
+                            + '<user1> and <user2>\'\n\n';
+    
+    let winBet =            'Win bet:\n'
+                            + '\'@sb <betID> won by <setter/taker>\'\n\n';
+
+    let winBetResponse =    'Win bet bot response:\n'
+                            + '\'Win confirmed for <betID>\'\n\n';
+
+    let cancelBet =       'Cancel bet:\n'
+                            + '\'@sb <betID> cancel\'\n\n';
+
+    let notes =             'Notes:\n'
+                            + 'Cancelling the bet will remove the\n'
+                            + 'bet entirely.\n'
+                            + 'Commands are based on the user that\n'
+                            + 'issued them. For example, user 3\n'
+                            + 'cannot cancel a bet between user 1\n'
+                            + 'and user 2.'
+                            + 'Currently only supports one vs. one\n'
+                            + 'betting.\n\n';
+
+    let visit =             'visit: https://fostivities.github.io/fostco/slawrence'
+                            + ' to view bet statistics.';
+
+    return title 
+            + nameUse
+            + definitions
+            + commands
+            + setBet
+            + setBetResponse
+            + acceptBet
+            + acceptBetResponse
+            + winBet
+            + cancelBet
+            + notes
+            + visit;
 }
 
 handleGroupMePost = (req, res) => {
