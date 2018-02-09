@@ -29,9 +29,9 @@ class Message {
         this.text = messageText.replace('@sb ', '');
         this.command = this.setCommand(this.text);
 
-        if (this.command.length > 0 || this.command === '--help') {
+        if (this.command.length > 0) {
             this.text = this.text.replace(this.command, '').trim();
-            this.isValid = this.text.length > 0 ? true : false;
+            this.isValid = this.text.length > 0 || this.command === '--help' ? true : false;
         }
     }
 
