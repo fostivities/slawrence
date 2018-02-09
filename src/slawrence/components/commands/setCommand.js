@@ -1,17 +1,21 @@
 const errorCommand = require('./errorCommand');
 
-setValidation = (betParts) => {
-    // Check if there is a '/' in the message
-    // Check if the first piece is a number
-    return betParts.length >= 2 && !isNaN(betParts[0]);
-}
-
-setCommand = (text) => {
+setCommand = (message) => {
     let setResponse = '';
-    let betParts = text.split("/");
+    let text = message.text;
+    let betParts = text.split(' ');
 
-    if (setValidation(betParts)) {
+    if (betParts.length >= 2 && !isNaN(betParts[0])) {
+        let betAmount = betParts.splice(0, 1);
+        let betDescription = '';
+        
+        for (let betPart of betParts) {
+            betDescription += betPart;
+        }
 
+        setResponse = betAmount + ' ' + betDescription;
+
+        setResponse = '$' + betAmount + ' ' + betDescription;
     } else {
         setResponse = errorCommand(1);
     }

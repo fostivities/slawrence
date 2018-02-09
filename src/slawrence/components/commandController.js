@@ -5,51 +5,22 @@ const wonCommand = require('./commands/wonCommand');
 const cancelCommand = require('./commands/cancelCommand');
 const errorCommand = require('./commands/errorCommand');
 
-removeCommand = (text, firstCommand) => {
-    return text.replace(text.substring(0, text.indexOf(firstCommand) + firstCommand.length), '').trim();
-}
-
-commandController = (text) => {
-    const commands = ['--help', 'set', 'take', 'won', 'cancel']
-    let lowestNum = null;
-    let firstCommand = '';
-    let response = '';
-
-    for (let command of commands) {
-        let x = command;
-        let commandIndex = text.indexOf(command);
-
-        if (commandIndex > -1) {
-            if (lowestNum === null) {
-                lowestNum = commandIndex;
-                firstCommand = command;
-            } else {
-                lowestNum = commandIndex <= lowestNum ? commandIndex : lowestNum;
-                if (commandIndex <= lowestNum) {
-                    lowestNum = commandIndex;
-                    firstCommand = command;
-                }
-            }
-        }
-    }
-
-    text = firstCommand ? removeCommand(text, firstCommand) : text;
-
-    switch (firstCommand) {
+commandController = (recievedMessage) => {
+    switch (recievedMessage.command) {
         case '--help':
             response = helpCommand();
             break;
         case 'set':
-            response = setCommand(text);
+            response = setCommand(recievedMessage);
             break;
         case 'take':
-            response = takeCommand(text);
+            response = takeCommand();
             break;
         case 'won':
-            response = wonCommand(text);
+            response = wonCommand();
             break;
         case 'cancel':
-            response = cancelCommand(text);
+            response = cancelCommand();
             break;
         default:
             response = errorCommand(0);
