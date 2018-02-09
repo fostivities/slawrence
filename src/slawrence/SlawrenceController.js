@@ -18,9 +18,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 handleGroupMePost = (req, res) => {
-    let senderType = req.body.sender_type;
-    let messageText = req.body.text;
-    if (senderType !== 'bot' && messageText && messageText.indexOf('@sb ') > -1) {
+    if (req.body.sender_type !== 'bot' && req.body.text && req.body.text.indexOf('@sb ') > -1) {
         let message = new Message(req.body);
 
         response.text = message.isValid ? commandController(message) : message.errorResponse;

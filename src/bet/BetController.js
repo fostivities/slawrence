@@ -8,7 +8,7 @@ router.use(bodyParser.json());
 
 getAllBets = (req, res) => {
     Bet.find({}, (err, bets) => {
-        if (err) return res.status(500).send('There was a problem finding the users.');
+        if (err) return res.status(500).send('There was a problem finding the users. ' + err);
         res.status(200).send(bets);
     });
 }
@@ -16,14 +16,14 @@ getAllBets = (req, res) => {
 postBet = (req, res) => {
     let newBet = new Bet(req.body);
     Bet.create(newBet, (err, bet) => {
-        if (err) return res.status(500).send('There was a problem adding the information to the database.');
+        if (err) return res.status(500).send('There was a problem adding the information to the database. ' + err);
         res.status(200).send(bet);
     });
 }
 
 getBetById = (req, res) => {
     Bet.findById(req.params.id, (err, bet) => {
-        if (err) return res.status(500).send('There was a problem finding the user.');
+        if (err) return res.status(500).send('There was a problem finding the user. ' + err);
         if (!bet) return res.status(404).send('No bet found');
         res.status(200).send(bet);
     });
@@ -31,7 +31,7 @@ getBetById = (req, res) => {
 
 updateBetById = (req, res) => {
     Bet.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, bet) => {
-        if (err) return res.status(500).send('There was a problem updating the user.');
+        if (err) return res.status(500).send('There was a problem updating the user. ' + err);
         if (!bet) return res.status(404).send('No bet found');
         res.status(200).send(bet);
     });
@@ -39,7 +39,7 @@ updateBetById = (req, res) => {
 
 deleteBetById = (req, res) => {
     Bet.findByIdAndRemove(req.params.id, (err, bet) => {
-        if (err) return res.status(500).send('There was a problem deleting the user.');
+        if (err) return res.status(500).send('There was a problem deleting the user. ' + err);
         if (!bet) return res.status(404).send('No bet found');
         res.status(200).send('bet ' + bet.description + ' was deleted.');
     });
