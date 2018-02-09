@@ -25,8 +25,6 @@ handleGroupMePost = (req, res) => {
         response.text = message.isValid ? commandController(message) : message.errorResponse;
         respond(res, response.text);
     }
-
-    res.status(200).send();
 }
 
 respond = (res, responseMessage) => {
