@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const BetSchema = new mongoose.Schema(
     {
-        _id: { type: Number, deafult: 0 },
+        _id: { type: Number },
         setterName: { type: String, require: true },
         amount: { type: Number, require: true },
         description: { type: String, require: true },
@@ -17,7 +17,7 @@ const BetSchema = new mongoose.Schema(
     }
 );
 
-var temp = mongoose.model('Bet', BetSchema);
+var betModel = mongoose.model('Bet', BetSchema);
 
 BetSchema.pre('save', function (next) {
     let now = new Date();
@@ -31,9 +31,9 @@ BetSchema.pre('save', function (next) {
     let thisBet = this;
 
     if (!this.betIndex) {
-        temp.findOne({}, {}, { sort: { 'createdAt': -1 } }, function (err, newestBet) {
-            if (err) return res.status(500).send('There was a problem adding the information the database.');
-            thisBet._id = newestBet && newestBet._id ? newestBet._id + 1 : 0;
+        betModel.findOne({}, {}, { sort: { 'createdAt': -1 } }, function (err, newestBet) {
+            if (err) return res.status(500).send('There was a problem adding the information the database. ' + err);
+            thisBet._id = newestBet && newestBet._id !== null && newestBet._id !== undefined ? newestBet._id + 1 : 0;
             next();
         });
     } else {
