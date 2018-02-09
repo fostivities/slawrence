@@ -20,12 +20,14 @@ router.use(bodyParser.json());
 handleGroupMePost = (req, res) => {
     let senderType = req.body.sender_type;
     let messageText = req.body.text;
-    if (senderType !== 'bot' && messageText && messageText.indexOf('@sb ') > -1) {
-        let message = new Message(req.body);
 
-        response.text = message.isValid ? commandController(message) : message.errorResponse;
-        respond(res, response.text);
-    }
+    respond(res, messageText);
+    // if (senderType !== 'bot' && messageText && messageText.indexOf('@sb ') > -1) {
+    //     let message = new Message(req.body);
+
+    //     response.text = message.isValid ? commandController(message) : message.errorResponse;
+    //     respond(res, response.text);
+    // }
 }
 
 respond = (res, responseMessage) => {
