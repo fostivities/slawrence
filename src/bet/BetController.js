@@ -54,7 +54,7 @@ deleteBetById = (req, res) => {
 
 router
     .get('/', (req, res) => getAllBets(req, res))
-    .get('/latestbet/', (req, res) => getLatestBetID(req, res))
+    .get('/latestbet/', (req, res) => getLatestBet(req, res))
     .post('/', (req, res) => postBet(req, res))
     .get('/:id', (req, res) => getBetById(req, res))
     .put('/:id', (req, res) => updateBetById(req, res))
