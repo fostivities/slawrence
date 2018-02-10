@@ -13,6 +13,13 @@ getAllBets = (req, res) => {
     });
 }
 
+const getLatestBetID = (req, res) => {
+    Bet.findOne({}, {}, { sort: { 'createdAt': -1 } }, function (err, newestBet) {
+        if (err) return res.status(500).send('There was a problem adding the information the database. ' + err);
+        res.status(200).send(newestBet);
+    });
+}
+
 postBet = (req, res) => {
     let newBet = new Bet(req.body);
     Bet.create(newBet, (err, bet) => {
@@ -47,6 +54,7 @@ deleteBetById = (req, res) => {
 
 router
     .get('/', (req, res) => getAllBets(req, res))
+    .get('/latestid', (req, res) => getLatestBetID(req, res))
     .post('/', (req, res) => postBet(req, res))
     .get('/:id', (req, res) => getBetById(req, res))
     .put('/:id', (req, res) => updateBetById(req, res))
