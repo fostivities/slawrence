@@ -15,13 +15,13 @@ const commandController = (recievedMessage) => {
                 resolve(betCommand(recievedMessage));
                 break;
             case 'take':
-                response = takeCommand();
+                resolve(takeCommand());
                 break;
             case 'won':
-                response = wonCommand();
+                resolve(wonCommand());
                 break;
             case 'cancel':
-                response = cancelCommand();
+                resolve(cancelCommand());
                 break;
             default:
                 resolve(errorCommand(0));
