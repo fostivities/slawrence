@@ -4,14 +4,14 @@ const helpCommand = () => {
         + 'Use @sb or @slawrence for commands (case doesn\'t matter)\n\n'
 
         + 'Definitions\n'
-        + 'setter:\n'
+        + 'better:\n'
         + 'person who made the bet.\n'
         + 'taker:\n'
         + 'person who accepted the bet\n\n'
 
         + 'Commands:\n'
         + 'Use @sb +\n'
-        + 'set [betID]/[bet description]\n'
+        + 'bet [betID]/[bet description]\n'
         + 'take [betID]\n'
         + 'won [betID] [setter/taker]\n'
         + 'cancel [betID]\n\n'

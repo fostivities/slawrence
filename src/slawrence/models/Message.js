@@ -36,7 +36,7 @@ class Message {
     }
 
     setCommand (text) {
-        const commands = ['--help', 'set', 'take', 'won', 'cancel'];
+        const commands = ['--help', 'bet', 'take', 'won', 'cancel'];
         let lowestIndex = null;
         let firstCommand = '';
 

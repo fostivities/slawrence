@@ -21,6 +21,8 @@ const handleGroupMePost = (req, res) => {
     if (req.body.sender_type !== 'bot' && req.body.text && req.body.text.indexOf('@sb ') > -1) {
         let message = new Message(req.body);
 
+        console.log(message.tempText);
+
         if (!message.isValid) {
             response.text = message.errorResponse;
             respond(res);
