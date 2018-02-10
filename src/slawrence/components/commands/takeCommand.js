@@ -1,4 +1,4 @@
-takeCommand = () => {
+const takeCommand = () => {
 
 }
 

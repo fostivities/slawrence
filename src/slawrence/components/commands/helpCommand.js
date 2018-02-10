@@ -1,4 +1,4 @@
-helpCommand = () => {
+const helpCommand = () => {
     return (
         'Slawrence\'s help section:\n'
         + 'Use @sb or @slawrence for commands (case doesn\'t matter)\n\n'

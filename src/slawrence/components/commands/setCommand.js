@@ -1,6 +1,6 @@
 const errorCommand = require('./errorCommand');
 
-setCommand = (message) => {
+const setCommand = (message) => {
     let setResponse = '';
     let text = message.text;
     let betParts = text.split(' ');

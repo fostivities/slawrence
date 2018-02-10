@@ -1,4 +1,4 @@
-cancelCommand = () => {
+const cancelCommand = () => {
 
 }
 

@@ -17,7 +17,7 @@ const response = {
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-handleGroupMePost = (req, res) => {
+const handleGroupMePost = (req, res) => {
     if (req.body.sender_type !== 'bot' && req.body.text && req.body.text.indexOf('@sb ') > -1) {
         let message = new Message(req.body);
 
@@ -26,7 +26,7 @@ handleGroupMePost = (req, res) => {
     }
 }
 
-respond = (res, responseMessage) => {
+const respond = (res, responseMessage) => {
     if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
         res.status(200).send(response);
     } else {

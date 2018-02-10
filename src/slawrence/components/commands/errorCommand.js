@@ -1,4 +1,4 @@
-errorCommand = (errorCode) => {
+const errorCommand = (errorCode) => {
     let response = '';
 
     const errorCodes = {

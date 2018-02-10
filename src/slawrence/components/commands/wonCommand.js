@@ -1,4 +1,4 @@
-wonCommand = () => {
+const wonCommand = () => {
 
 }
 

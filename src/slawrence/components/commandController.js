@@ -5,7 +5,7 @@ const wonCommand = require('./commands/wonCommand');
 const cancelCommand = require('./commands/cancelCommand');
 const errorCommand = require('./commands/errorCommand');
 
-commandController = (recievedMessage) => {
+const commandController = (recievedMessage) => {
     switch (recievedMessage.command) {
         case '--help':
             response = helpCommand();
