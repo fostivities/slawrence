@@ -1,26 +1,40 @@
 const errorCommand = require('./errorCommand');
+const superAgent = require('superagent');
+const Bet = require('../../../bet/Bet');
 
 const setCommand = (message) => {
-    let setResponse = '';
-    let text = message.text;
-    let betParts = text.split(' ');
+    return new Promise((resolve, reject) => {
+        let betParts = message.text.split(' ');
 
-    if (betParts.length >= 2 && !isNaN(betParts[0])) {
-        let betAmount = betParts.splice(0, 1);
-        let betDescription = '';
-        
-        for (let betPart of betParts) {
-            betDescription += betPart;
+        if (betParts.length >= 2 && !isNaN(betParts[0])) {
+            let betAmount = betParts.splice(0, 1)[0];
+            let betDescription = betParts.join(' ');
+
+            Bet.findOne({}, {}, { sort: { 'createdAt': -1 } }, (err, latestBet) => {
+                if (err) return "There was an error setting the ID.";
+
+                let newBetID = latestBet._id + 1;
+                let newBet = new Bet({
+                    setterName: message.name,
+                    amount: betAmount,
+                    description: betDescription,
+                    createdAt: message.createdAt,
+                    status: 'open'
+                });
+
+                superAgent.post('https://slawrence.herokuapp.com/bets/')
+                    .send(newBet)
+                    .then(() => {
+                        resolve('Bet set! Bet ID: ' + newBetID + ', Bet: ' + '$' + betAmount + ' ' + betDescription);
+                    })
+                    .catch((err) => {
+                        resolve('There was an error in saving this bet.');
+                    });
+            });
+        } else {
+            resolve(errorCommand(1));
         }
-
-        setResponse = betAmount + ' ' + betDescription;
-
-        setResponse = '$' + betAmount + ' ' + betDescription;
-    } else {
-        setResponse = errorCommand(1);
-    }
-
-    return setResponse;
+    });
 }
 
 module.exports = setCommand;

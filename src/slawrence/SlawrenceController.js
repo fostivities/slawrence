@@ -21,12 +21,20 @@ const handleGroupMePost = (req, res) => {
     if (req.body.sender_type !== 'bot' && req.body.text && req.body.text.indexOf('@sb ') > -1) {
         let message = new Message(req.body);
 
-        response.text = message.isValid ? commandController(message) : message.errorResponse;
-        respond(res, response.text);
+        if (!message.isValid) {
+            response.text = message.errorResponse;
+            respond(res);
+        } else {
+            commandController(message)
+                .then((commandResponse) => {
+                    response.text = commandResponse;
+                    respond(res);
+                })
+        }
     }
 }
 
-const respond = (res, responseMessage) => {
+const respond = (res) => {
     if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
         res.status(200).send(response);
     } else {

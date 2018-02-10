@@ -6,27 +6,27 @@ const cancelCommand = require('./commands/cancelCommand');
 const errorCommand = require('./commands/errorCommand');
 
 const commandController = (recievedMessage) => {
-    switch (recievedMessage.command) {
-        case '--help':
-            response = helpCommand();
-            break;
-        case 'set':
-            response = setCommand(recievedMessage);
-            break;
-        case 'take':
-            response = takeCommand();
-            break;
-        case 'won':
-            response = wonCommand();
-            break;
-        case 'cancel':
-            response = cancelCommand();
-            break;
-        default:
-            response = errorCommand(0);
-    }
-
-    return response;
+    return new Promise((resolve, reject) => {
+        switch (recievedMessage.command) {
+            case '--help':
+                response = helpCommand();
+                break;
+            case 'set':
+                resolve(setCommand(recievedMessage));
+                break;
+            case 'take':
+                response = takeCommand();
+                break;
+            case 'won':
+                response = wonCommand();
+                break;
+            case 'cancel':
+                response = cancelCommand();
+                break;
+            default:
+                response = errorCommand(0);
+        }
+    });
 };
 
 module.exports = commandController;
