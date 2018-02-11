@@ -44,9 +44,9 @@ const respond = (res) => {
     } else {
         superAgent.post(groupMeUrl)
             .send(response)
-            .then(() => {
-                res.status(200).send();
-            })
+            // .then(() => {
+            //     res.status(200).send();
+            // })
             .catch((err) => {
                 res.status(200).end('There was an error in posting. Error: ' + err);
             });

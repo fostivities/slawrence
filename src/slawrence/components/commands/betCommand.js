@@ -29,7 +29,7 @@ const betCommand = (message) => {
                         resolve('Bet set! Bet ID: ' + newBetID + ', Bet: ' + '$' + betAmount + ', ' + betDescription);
                     })
                     .catch((err) => {
-                        resolve('There was an error in saving this bet.' + err);
+                        resolve('There was an error in saving this bet. ' + err);
                     });
             });
         } else {
