@@ -25,7 +25,8 @@ const betCommand = (message) => {
                 superAgent.post('https://slawrence.herokuapp.com/bets/')
                     .send(newBet)
                     .then(() => {
-                        resolve('Bet set! Bet ID: ' + newBetID + ', Bet: ' + '$' + betAmount + ', ' + betDescription);
+                        // resolve('Bet set! Bet ID: ' + newBetID + ', Bet: ' + '$' + betAmount + ', ' + betDescription);
+                        resolve('fuck you miles');
                     })
                     .catch((err) => {
                         resolve('There was an error in saving this bet.');

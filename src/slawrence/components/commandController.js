@@ -5,17 +5,17 @@ const wonCommand = require('./commands/wonCommand');
 const cancelCommand = require('./commands/cancelCommand');
 const errorCommand = require('./commands/errorCommand');
 
-const commandController = (recievedMessage) => {
+const commandController = (message) => {
     return new Promise((resolve, reject) => {
-        switch (recievedMessage.command) {
+        switch (message.command) {
             case '--help':
                 resolve(helpCommand());
                 break;
             case 'bet':
-                resolve(betCommand(recievedMessage));
+                resolve(betCommand(message));
                 break;
             case 'take':
-                resolve(takeCommand());
+                resolve(takeCommand(message));
                 break;
             case 'won':
                 resolve(wonCommand());
