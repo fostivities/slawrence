@@ -18,7 +18,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 const handleGroupMePost = (req, res) => {
-    response.bot_id = req.body.group_id === 35018764 ? '4091fd6b5183549c40fd901abc' : '';
+    response.bot_id = req.body.group_id === 20928092 ? '' : '4091fd6b5183549c40fd901abc';
 
     if (req.body.sender_type !== 'bot' && req.body.text && req.body.text.indexOf('@sb ') > -1) {
         let message = new Message(req.body);
