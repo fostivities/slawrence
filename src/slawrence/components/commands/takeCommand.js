@@ -12,7 +12,6 @@ const takeCommand = (message) => {
             console.log('URL: https://slawrence.herokuapp.com/bets/' + message.text);
 
             superAgent.put('https://slawrence.herokuapp.com/bets/' + message.text)
-                    .type('form')
                     .send(updateBet)
                     .then(() => {
                         resolve('Bet: ' + message.text + ' taken by ' + message.name + '! Use \'@sb won [betID] [winner name]\' to determine winner.');

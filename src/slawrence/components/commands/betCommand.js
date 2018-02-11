@@ -23,7 +23,6 @@ const betCommand = (message) => {
                 });
 
                 superAgent.post('https://slawrence.herokuapp.com/bets/')
-                    .type('form')
                     .send(newBet)
                     .then(() => {
                         resolve('Bet set! Bet ID: ' + newBetID + ', Bet: ' + '$' + betAmount + ', ' + betDescription);
