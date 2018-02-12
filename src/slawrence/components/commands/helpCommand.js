@@ -11,9 +11,9 @@ const helpCommand = () => {
 
         + 'Commands:\n'
         + 'Use @sb +\n'
-        + 'bet [betID]/[bet description]\n'
+        + 'bet [bet amount] [bet description]\n'
         + 'take [betID]\n'
-        + 'won [betID] [setter/taker]\n'
+        + 'won [betID] [setter/taker name]\n'
         + 'cancel [betID]\n\n'
 
         + 'Once a bet is created using \'set\' a [betID] will be returned for use\n\n'

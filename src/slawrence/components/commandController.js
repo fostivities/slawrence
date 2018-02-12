@@ -18,15 +18,17 @@ const commandController = (message) => {
                 resolve(takeCommand(message));
                 break;
             case 'won':
-                resolve(wonCommand());
+                resolve(wonCommand(message));
                 break;
             case 'cancel':
-                resolve(cancelCommand());
+                resolve(cancelCommand(message));
                 break;
             default:
                 resolve(errorCommand(0));
         }
     });
 };
+
+
 
 module.exports = commandController;

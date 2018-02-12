@@ -6,10 +6,11 @@ class Message {
         this.id = message.sender_id || '';
         this.name = message.name.split(' ')[0] || '';
         this.createdAt = message.created_at || Date.now();
-        this.text = '';
         this.command = '';
+        this.betAmountOrID = '';
+        this.betDescriptionOrWinnerName = '';
 
-        this.cleanAndValidateText(message.text);
+        this.cleanValidateSetText(message.text);
 
         this.errorResponse = this.isValid ? 'No error' : 'This message is missing required information or if formatted incorrectly. use \'@sb --help\' for reference.';
 
@@ -18,20 +19,37 @@ class Message {
             id: this.id,
             name: this.name,
             createdAt: this.createdAt,
-            text: this.text,
-            command: this.command
+            command: this.command,
+            betAmountOrID: this.betAmountOrID,
+            betDescriptionOrWinnerName: this.betDescriptionOrWinnerName
         };
     }
 
-    cleanAndValidateText (messageText) {
-        messageText = messageText.toLowerCase();
-
-        this.text = messageText.replace('@sb ', '');
-        this.command = this.setCommand(this.text);
+    cleanValidateSetText (messageText) {
+        messageText = messageText.toLowerCase().replace('@sb ', '');
+        this.command = this.setCommand(messageText);
 
         if (this.command.length > 0) {
-            this.text = this.text.replace(this.command, '').trim();
-            this.isValid = this.text.length > 0 || this.command === '--help' ? true : false;
+            messageText = messageText.replace(this.command, '').trim();
+            this.parseText(messageText);
+        }
+    }
+
+    parseText (messageText) {
+        if (this.command === '--help') {
+            this.isValid = true;
+        } else {
+            let textParts = messageText.split(' ');
+            this.betAmountOrID = textParts.splice(0, 1)[0];
+
+            if (!isNaN(this.betAmountOrID)) {
+                if ((this.command === 'bet' || this.command === 'won')) {
+                    this.betDescriptionOrWinnerName = textParts.join(' ');
+                    this.isValid = this.betDescriptionOrWinnerName.length > 0 ? true : false;
+                } else {
+                    this.isValid = true;
+                }
+            }
         }
     }
 
