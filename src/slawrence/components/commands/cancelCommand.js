@@ -14,7 +14,7 @@ const cancelCommand = (message) => {
                     resolve('There was an error in deleting this bet.');
                 });
         } else {
-            resolve(errorCommand(2));
+            resolve(errorCommand(4));
         }
     });
 }

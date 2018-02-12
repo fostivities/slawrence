@@ -24,7 +24,7 @@ const wonCommand = (message) => {
                     resolve('There was an error in saving this bet.');
                 });
         } else {
-            resolve(errorCommand(2));
+            resolve(errorCommand(3));
         }
     });
 }

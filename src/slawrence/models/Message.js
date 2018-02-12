@@ -4,7 +4,7 @@ class Message {
     constructor(message) {
         this.isValid = false;
         this.id = message.sender_id || '';
-        this.name = message.name.split(' ')[0] || '';
+        this.name = message.name.split(' ')[0].toLowerCase() || '';
         this.createdAt = message.created_at || Date.now();
         this.command = '';
         this.betAmountOrID = '';
