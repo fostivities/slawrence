@@ -13,16 +13,6 @@ class Message {
         this.cleanValidateSetText(message.text);
 
         this.errorResponse = this.isValid ? 'No error' : 'This message is missing required information or if formatted incorrectly. use \'@sb --help\' for reference.';
-
-        this.tempText = {
-            isValid: this.isValid,
-            id: this.id,
-            name: this.name,
-            createdAt: this.createdAt,
-            command: this.command,
-            betAmountOrID: this.betAmountOrID,
-            betDescriptionOrWinnerName: this.betDescriptionOrWinnerName
-        };
     }
 
     cleanValidateSetText (messageText) {
