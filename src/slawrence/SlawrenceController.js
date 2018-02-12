@@ -34,6 +34,8 @@ const handleGroupMePost = (req, res) => {
                 })
         }
     }
+
+    res.status(200).send();
 }
 
 const respond = (res) => {
