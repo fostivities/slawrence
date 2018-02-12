@@ -44,7 +44,7 @@ class Message {
 
             if (!isNaN(this.betAmountOrID)) {
                 if ((this.command === 'bet' || this.command === 'won')) {
-                    this.betDescriptionOrWinnerName = textParts.join(' ');
+                    this.betDescriptionOrWinnerName = this.command === 'bet' ? textParts.join(' ') : textParts.join(' ').toLowerCase();
                     this.isValid = this.betDescriptionOrWinnerName.length > 0 ? true : false;
                 } else {
                     this.isValid = true;
