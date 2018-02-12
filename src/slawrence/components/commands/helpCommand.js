@@ -4,7 +4,7 @@ const helpCommand = () => {
         + 'Use @sb or @slawrence for commands (case doesn\'t matter)\n\n'
 
         + 'Definitions\n'
-        + 'better:\n'
+        + 'setter:\n'
         + 'person who made the bet.\n'
         + 'taker:\n'
         + 'person who accepted the bet\n\n'

@@ -28,7 +28,7 @@ const betCommand = (message) => {
                         );
                     })
                     .catch((err) => {
-                        resolve('There was an error in saving this bet. ' + err);
+                        resolve('There was an error in saving this bet. ' + err.stack);
                     });
             });
         } else {

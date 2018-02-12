@@ -5,14 +5,14 @@ class Message {
         this.isValid = false;
         this.id = message.sender_id || '';
         this.name = message.name.split(' ')[0].toLowerCase() || '';
-        this.createdAt = message.created_at || Date.now();
+        this.createdAt = Date.now();
         this.command = '';
         this.betAmountOrID = '';
         this.betDescriptionOrWinnerName = '';
 
         this.cleanValidateSetText(message.text);
 
-        this.errorResponse = this.isValid ? 'No error' : 'This message is missing required information or if formatted incorrectly. use \'@sb --help\' for reference.';
+        this.errorResponse = this.isValid ? 'No error' : 'This message is missing required information or is formatted incorrectly. use \'@sb --help\' for reference.';
     }
 
     cleanValidateSetText (messageText) {
