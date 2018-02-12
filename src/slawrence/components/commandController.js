@@ -58,11 +58,9 @@ const advancedCommand = (message) => {
 const advancedTakeCommand = (bet, message) => {
     if (bet.status !== 'open') {
         return 'You cannot take a bet that has already been set between two people or is already won.';
-    } 
-    // else if (bet.setterName === message.name) {
-    //     return "You are not allowed to make a bet with yourself, dummy.";
-    // } 
-    else {
+    } else if (bet.setterName === message.name) {
+        return "You are not allowed to make a bet with yourself, dummy.";
+    } else {
         return takeCommand(message);
     }
 }
