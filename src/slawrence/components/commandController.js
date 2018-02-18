@@ -86,7 +86,7 @@ const advancedWonCommand = (bet, message) => {
         return 'A bet must be set between two people before being able to win.';
     } else {
         if ((bet.setterName === message.betDescriptionOrWinnerName || bet.takerName === message.betDescriptionOrWinnerName)
-            && (isAdmin || bet.setterName === message.name || bet.takerName === message.name)) {
+            && (message.isAdmin || bet.setterName === message.name || bet.takerName === message.name)) {
                 return wonCommand(message);
             } else {
                 return 'You cannot win a bet you are not a part of and the winner must be either the setter or taker.';
