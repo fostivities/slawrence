@@ -7,6 +7,7 @@ const pushCommand = (message) => {
         if (message.betAmountOrID) {
             var updateBet = {
                 status: 'pushed',
+                winnerName: 'tied',
                 betResolvedAt: message.createdAt
             };
 
