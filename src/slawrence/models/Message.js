@@ -12,6 +12,7 @@ class Message {
 
         this.cleanValidateSetText(message.text);
 
+        this.isAdmin = this.name === 'jordan' ? true : false;
         this.errorResponse = this.isValid ? 'No error' : 'This message is missing required information or is formatted incorrectly. use \'@sb --help\' for reference.';
     }
 
@@ -44,7 +45,7 @@ class Message {
     }
 
     setCommand (text) {
-        const commands = ['--help', 'bet', 'take', 'won', 'cancel'];
+        const commands = ['--help', 'bet', 'take', 'won', 'cancel', 'push'];
         let lowestIndex = null;
         let firstCommand = '';
 

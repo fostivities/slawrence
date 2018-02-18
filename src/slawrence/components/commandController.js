@@ -1,10 +1,11 @@
-const helpCommand = require('./commands/helpCommand');
+const Bet = require('../../bet/Bet');
 const betCommand = require('./commands/betCommand');
-const takeCommand = require('./commands/takeCommand');
-const wonCommand = require('./commands/wonCommand');
 const cancelCommand = require('./commands/cancelCommand');
 const errorCommand = require('./commands/errorCommand');
-const Bet = require('../../bet/Bet');
+const helpCommand = require('./commands/helpCommand');
+const pushCommand = require('./commands/pushCommand');
+const takeCommand = require('./commands/takeCommand');
+const wonCommand = require('./commands/wonCommand');
 
 const commandController = (message) => {
     return new Promise((resolve, reject) => {
@@ -18,6 +19,7 @@ const commandController = (message) => {
             case 'take':
             case 'won':
             case 'cancel':
+            case 'push':
                 resolve(advancedCommand(message));
                 break;
             default:
@@ -41,6 +43,8 @@ const advancedCommand = (message) => {
                         case 'won':
                             resolve(advancedWonCommand(bet, message));
                             break;
+                        case 'push':
+                            resolve(advancedPushCommand(bet, message));
                         case 'cancel':
                             resolve(advancedCancelCommand(bet, message));
                             break;
@@ -58,10 +62,22 @@ const advancedCommand = (message) => {
 const advancedTakeCommand = (bet, message) => {
     if (bet.status !== 'open') {
         return 'You cannot take a bet that has already been set between two people or is already won.';
-    } else if (bet.setterName !== 'jordan' && bet.setterName === message.name) {
+    } else if (!message.isAdmin && bet.setterName === message.name) {
         return "You are not allowed to make a bet with yourself, dummy.";
     } else {
         return takeCommand(message);
+    }
+}
+
+const advancedPushCommand = (bet, message) => {
+    if (bet.status !== 'in progress') {
+        return 'A bet must be set between two people before beign able to push.';
+    } else {
+        if (message.isAdmin || bet.setterName === message.name || bet.takerName === message.name) {
+            return pushCommand(message);
+        } else {
+            return 'You cannot push a bet you are not a part of.'
+        }
     }
 }
 
@@ -70,7 +86,7 @@ const advancedWonCommand = (bet, message) => {
         return 'A bet must be set between two people before being able to win.';
     } else {
         if ((bet.setterName === message.betDescriptionOrWinnerName || bet.takerName === message.betDescriptionOrWinnerName)
-            && (bet.setterName === message.name || bet.takerName === message.name)) {
+            && (isAdmin || bet.setterName === message.name || bet.takerName === message.name)) {
                 return wonCommand(message);
             } else {
                 return 'You cannot win a bet you are not a part of and the winner must be either the setter or taker.';
@@ -79,7 +95,7 @@ const advancedWonCommand = (bet, message) => {
 }
 
 const advancedCancelCommand = (bet, message) => {
-    if (bet.setterName !== message.name) {
+    if (!message.isAdmin && bet.setterName !== message.name) {
         return 'You cannot cancel a bet that you did not make. Have the bet setter cancel the bet.';
     } else if (bet.status === 'in progress') {
         return 'You cannot cancel a bet if it has been taken by someone else and has not been won yet.';
